@@ -6,10 +6,11 @@ class CustomBottomNavigationBar extends StatefulWidget {
   final Function(int) onChange;
   final List<IconData> iconList;
 
-  CustomBottomNavigationBar(
-      {this.defaultSelectedIndex = 0,
-      required this.iconList,
-      required this.onChange});
+  const CustomBottomNavigationBar({
+    this.defaultSelectedIndex = 0,
+    required this.iconList,
+    required this.onChange,
+  });
 
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -34,7 +35,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     List<Widget> _navBarItemList = [];
     //Get icon list and add into _navBarItemList
     for (var i = 0; i < _iconList.length; i++) {
-      _navBarItemList.add(buildNavBarItem(_iconList[i], i));
+      _navBarItemList.add(
+        buildNavBarItem(_iconList[i], i),
+      );
     }
     //Show item in icon in row inside bottom navigation bar
     return Row(
@@ -57,10 +60,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             _iconList.length, //Suitable for device size and number of icon
         decoration: index == _selectedIndex
             ? BoxDecoration(
-                border: Border(
+                border: const Border(
                   top: BorderSide(
-                      width: 3,
-                      color: kPrimaryColor), //Top border line for selected icon
+                    width: 3,
+                    color: kPrimaryColor,
+                  ), //Top border line for selected icon
                 ),
                 color: index == _selectedIndex
                     ? kPrimaryColor

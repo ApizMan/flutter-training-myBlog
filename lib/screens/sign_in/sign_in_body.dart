@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_scale_tap/flutter_scale_tap.dart';
 
 class SignInBody extends StatefulWidget {
   const SignInBody({super.key});
@@ -16,6 +17,7 @@ class _SignInBodyState extends State<SignInBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -56,7 +58,7 @@ class _SignInBodyState extends State<SignInBody> {
           const SizedBox(
             height: 50,
           ),
-          //email textfeild
+          //email textfield
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Container(
@@ -75,10 +77,10 @@ class _SignInBodyState extends State<SignInBody> {
                 ],
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: TextField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintStyle: TextStyle(fontSize: 15),
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -94,7 +96,7 @@ class _SignInBodyState extends State<SignInBody> {
           const SizedBox(
             height: 10,
           ),
-          // password textfeild
+          // password textfield
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Container(
@@ -113,11 +115,11 @@ class _SignInBodyState extends State<SignInBody> {
                 ],
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: TextField(
                   obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintStyle: TextStyle(fontSize: 15),
                     prefixIcon: Icon(Icons.lock_outlined),
                     hintText: "Password",
@@ -133,17 +135,14 @@ class _SignInBodyState extends State<SignInBody> {
           //sign in button
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Navigation(),
-                    ),
-                  );
-                });
+            child: ScaleTap(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Navigation(),
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
@@ -154,7 +153,7 @@ class _SignInBodyState extends State<SignInBody> {
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.blueGrey[900],
                 ),
-                child: Text(
+                child: const Text(
                   "Sign In",
                   style: TextStyle(
                     color: Colors.white,
@@ -164,22 +163,22 @@ class _SignInBodyState extends State<SignInBody> {
               ),
             ),
           ),
-          SizedBox(
-            height: 5,
+          const SizedBox(
+            height: 10,
           ),
           //Don't have account yet? Sign Up
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Don't have account yet?",
                 style: TextStyle(color: Colors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
-              GestureDetector(
-                onTap: () {
+              ScaleTap(
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

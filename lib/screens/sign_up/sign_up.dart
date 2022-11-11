@@ -1,7 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:app_training/constant.dart';
 import 'package:app_training/screens/homepage/homepage.dart';
-import 'package:app_training/screens/sign_up/components/sign_up_body.dart';
+import 'package:app_training/screens/sign_up/sign_up_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,16 +20,19 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: IconThemeData.fallback(),
+        // iconTheme: IconThemeData.fallback(),
+        leading: const BackButton(
+          color: kBlack,
+        ),
         elevation: 0,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 18,
           fontFamily: "Poppins",
           fontWeight: FontWeight.bold,
         ),
-        title: Padding(
-          padding: const EdgeInsets.only(right: 50.0),
+        title: const Padding(
+          padding: EdgeInsets.only(right: 50.0),
           child: Center(
             child: Text("Registration"),
           ),
@@ -40,6 +44,7 @@ class _SignUpState extends State<SignUp> {
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overScroll) {
             overScroll.disallowGlow();
+            
             return true;
           },
           child: SignUpBody(),

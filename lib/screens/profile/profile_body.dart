@@ -1,5 +1,5 @@
 import 'package:app_training/public_components/button_primary.dart';
-import 'package:app_training/screens/profile/components/profile_top_part.dart';
+import 'package:app_training/screens/profile/profile_top_part.dart';
 import 'package:flutter/material.dart';
 
 class ProfileBody extends StatefulWidget {
@@ -18,21 +18,8 @@ class _ProfileBodyState extends State<ProfileBody> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: Column(
-              children: [
-                ProfileTopPart(), //Container that show profile pic, name and others
-              ],
-            ),
-          ),
-          ButtonPrimary(
-            onPressed: () {
-              setState(() {});
-            },
-            icon: Icons.logout,
-            text: "Logout",
-            primaryColor: Colors.red,
-          ),
+          ProfileTopPart(),
+         
         ],
       ),
     );

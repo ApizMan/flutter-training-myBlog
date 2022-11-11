@@ -1,8 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:app_training/screens/homepage/components/homepage_body.dart';
+import 'package:app_training/constant.dart';
+import 'package:app_training/screens/homepage/homepage_body.dart';
 import 'package:app_training/public_components/animated_search_bar.dart';
 import 'package:app_training/public_components/custom_card.dart';
+import 'package:app_training/screens/post/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: AnimatedSearchBar(
-          searchDecoration: InputDecoration(
+          searchDecoration: const InputDecoration(
             border: InputBorder.none,
             hintText: "Search",
           ),
@@ -43,10 +45,10 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           label: Row(
-            children: [
+            children: const [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
+                  padding: EdgeInsets.only(left: 30.0),
                   child: Text(
                     "MyBlog",
                     style: TextStyle(
@@ -69,16 +71,32 @@ class _HomePageState extends State<HomePage> {
           color: Colors.grey[900],
         ),
       ),
-      body: SafeArea(
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (overScroll) {
-                  overScroll.disallowGlow();
-                  return true;
-                },
-                child: HomePageBody(),
-              ))),
+      body: HomePageBody(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Post(),
+              ));
+        },
+        child: Container(
+          height: 50,
+          width: 50,
+          //padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.8),
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.note_add,
+              color: kBlack,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

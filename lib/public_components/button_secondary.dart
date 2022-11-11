@@ -29,8 +29,8 @@ class ButtonSecondary extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           icon == null ? SizedBox() : Icon(icon),
-          SizedBox(
-            width: 5,
+         SizedBox(
+            width: icon == null ? 0 : 5,
           ),
           Text(text),
         ],

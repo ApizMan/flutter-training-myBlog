@@ -1,7 +1,10 @@
+import 'package:app_training/constant.dart';
+import 'package:app_training/screens/post/edit_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_scale_tap/flutter_scale_tap.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -28,14 +31,16 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: 2,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            SingleChildScrollView(
-              child: Container(
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
@@ -112,8 +117,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                         horizontal: 24.0,
                       ),
                       child: Text(
-                        "   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet porttitor lacus luctus accumsan tortor posuere ac.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet porttitor lacus luctus accumsan tortor posuere ac dhfhd vhdfh dh dh hfu egugfgreyghsfgrwghfsogh.",
                         maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.blueGrey[200]),
                       ),
                     ),
@@ -124,30 +130,36 @@ class _HomePageBodyState extends State<HomePageBody> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {},
+                        ScaleTap(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditPost(),
+                              ),
+                            );
+                          },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20.0,
                               vertical: 10.0,
                             ),
                             child: Container(
+                                padding: EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: Colors.blueGrey.shade900,
                                     width: 1,
                                   ),
                                   shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(14),
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.white,
                                 ),
                                 child: Row(
                                   children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.edit,
-                                      ),
+                                    const Icon(
+                                      Icons.edit,
+                                      color: kBlack,
                                     ),
                                     Text(
                                       "Edit Post",
@@ -172,13 +184,13 @@ class _HomePageBodyState extends State<HomePageBody> {
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        );
-      },
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

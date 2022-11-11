@@ -5,6 +5,8 @@ import 'package:app_training/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class Navigation extends StatefulWidget {
+  const Navigation({super.key});
+  
   @override
   _NavigationState createState() => _NavigationState();
 }
@@ -12,30 +14,21 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedItem = 0;
   //Options or page show in body when selected
-  static List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    Post(),
-    Profile(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomePage(),
+    const Profile(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavigationBar(
-        iconList: [
+        iconList: const [
           Icons.home_outlined,
-          Icons.control_point_sharp,
           Icons.person_outline_outlined,
         ],
         onChange: (val) {
           setState(() {
             _selectedItem = val;
-            _selectedItem == 1
-                ? Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Post(),
-                    ))
-                : null;
           });
         },
         defaultSelectedIndex: 0,

@@ -1,24 +1,24 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:app_training/public_components/button_primary.dart';
-import 'package:app_training/screens/post/edit_post.dart';
+import 'package:app_training/public_components/button_secondary.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class PostBody extends StatefulWidget {
-  const PostBody({super.key});
+class EditPostBody extends StatefulWidget {
+  const EditPostBody({super.key});
 
   @override
-  State<PostBody> createState() => _PostBodyState();
+  State<EditPostBody> createState() => _EditPostBodyState();
 }
 
-class _PostBodyState extends State<PostBody> {
+class _EditPostBodyState extends State<EditPostBody> {
   File? image;
 
   Future pickImage() async {
-    //access gallery and get selected image path
+    //access gallery and get selected image path for printed receipt
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
@@ -35,12 +35,11 @@ class _PostBodyState extends State<PostBody> {
   TextEditingController textarea = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView( //Able to scroll the screen
+    return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            //Top container to upload image
             DottedBorder(
               borderType: BorderType.RRect,
               radius: Radius.circular(20),
@@ -48,42 +47,43 @@ class _PostBodyState extends State<PostBody> {
               color: Colors.grey,
               strokeWidth: 2,
               child: Container(
-                  child: image == null
-                      ? InkWell( //show this if no img
-                          onTap: () => pickImage(),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.02),
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5)),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.grey,
-                              size: 50,
-                            ),
-                          ))
-                      : ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5)),
-                          child: Image.file(
-                            image!,
-                            fit: BoxFit.cover,
-                          )),
-                  width: 300,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                  )),
+                width: 300,
+                height: 200,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                ),
+                child: image == null
+                    ? InkWell(
+                        onTap: () => pickImage(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.02),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5)),
+                          ),
+                          child: const Icon(
+                            Icons.image_outlined,
+                            color: Colors.grey,
+                            size: 50,
+                          ),
+                        ))
+                    : ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5)),
+                        child: Image.asset(
+                          "assets/images/profilepic.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+              ),
             ),
-            //Text field for title and descripton
             Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(children: [
                   TextField(
                     // controller: textarea,
@@ -93,7 +93,7 @@ class _PostBodyState extends State<PostBody> {
                       disabledBorder: null,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           width: 0,
                           style: BorderStyle.none,
                         ),
@@ -103,7 +103,7 @@ class _PostBodyState extends State<PostBody> {
                       fillColor: Colors.grey.withOpacity(0.5),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextField(
@@ -114,13 +114,13 @@ class _PostBodyState extends State<PostBody> {
                       disabledBorder: null,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           width: 0,
                           style: BorderStyle.none,
                         ),
                       ),
                       hintText: "Description",
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                           borderSide:
                               BorderSide(width: 1, color: Colors.redAccent)),
                       filled: true,
@@ -128,25 +128,33 @@ class _PostBodyState extends State<PostBody> {
                     ),
                   ),
                 ])),
+            //Bottom button
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Container(),
+                  ButtonSecondary(
+                    onPressed: () {},
+                    primaryColor: Colors.red,
+                    text: "Delete",
                   ),
-                  Container(
-                    width: 100,
-                    //button to post 
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  ButtonSecondary(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    text: "Cancel",
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Expanded(
                     child: ButtonPrimary(
-                      onPressed: (() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditPost(),
-                            ));
-                      }),
-                      text: "Post",
+                      onPressed: () {},
+                      text: "Update",
                       style: 1,
                     ),
                   ),
