@@ -1,3 +1,4 @@
+import 'package:app_training/screens/homepage/homepage.dart';
 import 'package:app_training/screens/navigation_bar/custom_bottom_navigation_bar.dart';
 import 'package:app_training/screens/post/post.dart';
 import 'package:app_training/screens/profile/profile.dart';
@@ -12,9 +13,7 @@ class _NavigationState extends State<Navigation> {
   int _selectedItem = 0;
   //Options or page show in body when selected
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-    ),
+    HomePage(),
     Post(),
     Profile(),
   ];
